@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/VectorProject.dir/tema.cpp.o  -o VectorProject 
