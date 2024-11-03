@@ -23,13 +23,20 @@ public:
         }
     }
 
-    // Copy constructor
+    /*Copy constructor
     Vector(const Vector& other) : size(other.size) {
         elements = new int[size];
         for (int i = 0; i < size; ++i) {
             elements[i] = other.elements[i];
         }
         cout << "Copy constructor: " << endl;  
+    } */
+
+    // suprascrie copy constructor
+    Vector(const Vector& other) : size(other.size), elements(other.elements){
+        
+        
+        cout << "Suprascrie Copy constructor: " << endl;  
     } 
 
    
@@ -57,6 +64,14 @@ public:
         cout<<endl;
         
     }
+
+      
+    void copyAndModify() {
+        for (int i = 0; i < size; ++i) {
+            elements[i] = 1; 
+        }
+        cout << "Toate elementele au fost setate pe 1: " << endl;  
+    }
 };
 
 int main() {
@@ -75,15 +90,23 @@ int main() {
     sum.print();
 
 
-    // Folosim constructorul de copiere
+    // folosim constructorul de copiere
     Vector v3(v1);  
     cout << "Vectorul copiat (v3): ";
     v3.print();
 
-    // Afișăm valorile înainte de modificare
+    
     cout << "Vector original (v1): ";
     v1.print();
    
+
+    v3.copyAndModify(); 
+    cout << "Vectorul v3 după setAllToOne: "<<endl;
+    v3.print();
+    cout<<"Asa arata elementele lui v1 acum: ";
+    v1.print(); 
+    //destructorul va incerca sa elibereze memoria partajata, deci o eliberare dubla
+
     
     
     return 0;
