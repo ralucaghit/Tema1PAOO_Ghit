@@ -23,28 +23,35 @@ public:
         }
     }
 
-    /*Copy constructor
+    //Copy constructor
     Vector(const Vector& other) : size(other.size) {
         elements = new int[size];
-        for (int i = 0; i < size; ++i) {
+        for (int i = 0; i < size; i++) {
             elements[i] = other.elements[i];
         }
         cout << "Copy constructor: " << endl;  
-    } */
+    } 
 
-    // suprascrie copy constructor
+    /* suprascrie copy constructor
     Vector(const Vector& other) : size(other.size), elements(other.elements){
         
         
         cout << "Suprascrie Copy constructor: " << endl;  
-    } 
+    } */
 
+     // Move constructor
+    Vector(Vector&& other) noexcept : size(other.size), elements(other.elements) {
+        cout << "Move constructor: " << endl;
+        other.elements = nullptr; // Eliberăm referința din obiectul sursă
+        
+    }
    
 
 
     //destructor pentru a elibera memoria
     ~Vector() {
         delete[] elements;
+        cout<<"Destructor pentru vector"<<endl;
     }
 
     // metoda pentru adunare
@@ -67,7 +74,7 @@ public:
 
       
     void copyAndModify() {
-        for (int i = 0; i < size; ++i) {
+        for (int i = 0; i < size; i++) {
             elements[i] = 1; 
         }
         cout << "Toate elementele au fost setate pe 1: " << endl;  
@@ -107,6 +114,14 @@ int main() {
     v1.print(); 
     //destructorul va incerca sa elibereze memoria partajata, deci o eliberare dubla
 
+
+    Vector v4(std::move(v1));
+    cout<<"Vector mutat(v4): ";
+    v4.print();
+
+    // Verificam v1 pentru a vedea daca a fost afectat
+    //cout << "Vector original (v1) dupa mutare: ";
+    //v1.print(); // Ar trebui sa fie un pointer null
     
     
     return 0;
